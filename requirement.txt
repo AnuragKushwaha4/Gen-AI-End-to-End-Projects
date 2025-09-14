@@ -7,3 +7,6 @@ bs4
 streamlit
 langchain_openai
 langchain-huggingface
+pypdf
+langchain-chroma
+unstructured
