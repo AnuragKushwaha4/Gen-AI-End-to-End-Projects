@@ -1,2 +1,3 @@
-### This Repo is to showcase my GenAI project created over Streamlit (Python)
-1st Project is simple Chatbot powered by opensource LLM of Groq that give Response to the query of the user.
+### This Repo is to showcase my GenAI project created over Streamlit (Python + Langchain)
+1st Project is simple Chatbot powered by opensource LLMs of Groq that give Response to the query of the user. 
+2nd Project is RAG Document QnA Chatbot used to provide the insites of the uploaded documents currently it supports pdf files and text files later i have plans to add compatibitlity of images. In this Project I created a chatbot that help user to get specific answer from large books as user dont have tor read entire documents. I implemented RAG to create this BOT.
