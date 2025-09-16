@@ -1,5 +1,4 @@
 import os
-from io import BytesIO
 import streamlit as st
 from dotenv import load_dotenv
 load_dotenv()
@@ -23,7 +22,6 @@ from langchain_chroma import Chroma
 #function to create Vector DB:
 def create_db(file):
     extension = os.path.splitext(file.name)[1].lower()
-    path = BytesIO(file.getbuffer())
 
     if extension == ".pdf":
         file_path = os.path.join("Resources", file.name)
