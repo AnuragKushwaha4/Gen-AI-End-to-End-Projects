@@ -10,3 +10,5 @@ langchain-huggingface
 pypdf
 langchain-chroma
 unstructured
+arxiv
+wikipedia
