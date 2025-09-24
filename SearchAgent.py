@@ -31,7 +31,7 @@ tools = [wikipedia,arxiv,search]
 
 st.title("AI Search Agent")
 st.sidebar.write("Upload WebLink:")
-uploaded_webpage = st.sidebar.chat_input(placeholder="https://github.com")
+uploaded_webpage = st.sidebar.text_input("upload Link",placeholder="https://github.com")
 if uploaded_webpage:
     #2.Custom Wrappers for searching from specific website.
     from langchain_community.document_loaders import WebBaseLoader
@@ -49,12 +49,13 @@ if uploaded_webpage:
 
     retriever_tool = create_retriever_tool(
     retriever,
-    "Web Based tool",
+    "Web_Based_tool",
     "Use this tool to answer questions using the content of the uploaded webpage. "
     "If the user provides a link, prefer this tool."
 )
 
     tools.insert(0,retriever_tool)
+    
 
 if "message" not in st.session_state:
     st.session_state["message"]=[
@@ -75,8 +76,9 @@ if prompt:=st.chat_input(placeholder="What is Generative AI?"):
     Agent = initialize_agent(tools,llm,agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,handling_parsing_errors=True)
 
     with st.chat_message("assistant"):
-        st_cb=StreamlitCallbackHandler(st.container(),expand_new_thoughts=False)
-        response=Agent.run(st.session_state.message,callbacks=[st_cb])
-        st.session_state.message.append({'role':'assistant',"content":response})
+        st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
+        user_query = st.session_state.message[-1]["content"]
+        response = Agent.invoke({"input": user_query}, config={"callbacks": [st_cb]})
+        st.session_state.message.append({'role':'assistant', "content": response})
         st.write(response)
 
