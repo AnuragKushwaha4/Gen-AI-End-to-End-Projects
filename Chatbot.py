@@ -55,7 +55,7 @@ if modeltype=="OpenAI":
     temperature= st.sidebar.slider("Temperature",max_value=1.0,min_value=0.0,value=0.7,step=0.1)
     maxtoken = st.sidebar.slider("Max Tokens",min_value=50,max_value=500,value=200)
     st.write("How Can I Help You...🤞")
-    input_text = st.text_input("You")
+    input_text = st.chat_input(placeholder="You")
     if input_text:
         response = generateResponseOPENAI(input_text,api,maxtoken,temperature,llm)
         st.write(response)
@@ -64,7 +64,7 @@ else:
     temperature= st.sidebar.slider("Temperature",max_value=1.0,min_value=0.0,value=0.7,step=0.1)
     maxtoken = st.sidebar.slider("Max Tokens",min_value=50,max_value=500,value=200)
     st.write("How Can I Help You...🤞")
-    input_text = st.text_input("You")
+    input_text = st.chat_input(placeholder="You")
     if input_text:
         response = generateResponseOPENSOURCE(input_text,maxtoken,temperature,llm)
         st.write(response)
