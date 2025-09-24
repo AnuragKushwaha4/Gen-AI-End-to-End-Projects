@@ -73,12 +73,12 @@ if prompt:=st.chat_input(placeholder="What is Generative AI?"):
     st.session_state.message.append({"role":"user","content":prompt})
     st.chat_message("user").write(prompt)
 
-    Agent = initialize_agent(tools,llm,agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,handling_parsing_errors=True)
-
+    Agent = initialize_agent(tools,llm,agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION)
+# Printing response
     with st.chat_message("assistant"):
         st_cb = StreamlitCallbackHandler(st.container(), expand_new_thoughts=False)
         user_query = st.session_state.message[-1]["content"]
-        response = Agent.invoke({"input": user_query}, config={"callbacks": [st_cb]})
+        response=Agent.run(st.session_state.message,callbacks=[st_cb])
         st.session_state.message.append({'role':'assistant', "content": response})
         st.write(response)
 
