@@ -12,3 +12,6 @@ Tools: Tools are basically a function or External function that can capable to p
 Agents:Agents are like smart decision makers that knows how to use tools and where to use which tool.
 
 it is a AI Project that implement different tools for solving user query through AI. It has wikipedia , arxiv , DuckDuckgosearch tool provided by langchain and one self made tool for Web based query .In this Project i created a AI agent that help user to find its query from different tools.
+
+
+5th AI Assitant for Managing Database.
