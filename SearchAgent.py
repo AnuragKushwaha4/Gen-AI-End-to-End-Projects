@@ -8,7 +8,8 @@ os.environ["LANGCHAIN_TRACING_V2"]="true"
 os.environ["HF_API_KEY"]=os.getenv("HF_API_KEY")
 
 import streamlit as st
-from langchain.callbacks import StreamlitCallbackHandler
+from langchain_community.callbacks.streamlit import StreamlitCallbackHandler
+
 from langchain_groq import ChatGroq
 llm= ChatGroq(model="llama-3.3-70b-versatile")
 
