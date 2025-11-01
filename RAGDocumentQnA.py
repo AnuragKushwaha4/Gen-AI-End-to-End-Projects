@@ -26,13 +26,13 @@ def create_db(file):
     if extension == ".pdf":
         file_path = os.path.join("Resources", file.name)
         with open(file_path, "wb") as f:
-            f.write(path.read())
+            f.write(file.read())
         loader = PyPDFLoader(file_path)
         docs = loader.load()
 
     elif extension ==".txt":
-        path.seek(0)
-        text_content = path.read().decode("utf-8")
+        file.seek(0)
+        text_content = file.read().decode("utf-8")
         docs = [{"page_content": text_content}]
     else:
         return -1
