@@ -56,3 +56,16 @@ if db_uri==MYSQL:
 else:
     db = configureDB(db_uri)
 
+
+toolkit = SQLDatabaseToolkit(llm=llm,db=db)
+
+agent = create_sql_agent(
+    llm=llm,
+    toolkit=toolkit,
+    verbose=True,
+    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION
+)
+
+query=st.chat_input("Enter your Query")
+res= agent.invoke(query)
+st.write(res)
