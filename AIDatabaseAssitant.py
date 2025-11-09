@@ -7,7 +7,7 @@ os.environ["LANGCHAIN_PROJECT"]=os.getenv("LANGCHAIN_PROJECT")
 os.environ["LANGCHAIN_TRACING_V2"]="true"
 from pathlib import Path
 
-print(f"../Langchain/Database Manager AI/student.db")
+
 
 import streamlit as st
 from langchain.agents import create_sql_agent
@@ -38,6 +38,21 @@ else:
     db_uri=LOCAL_DB
 
 
+if not db_uri:
+    st.info("Please enter The DataBase URI")
 
 
+@st.cache_resource(ttl='2h')
+def configureDB(dburi,mysqlHost = None,mysqluser = None, mysqlPassword = None,mysqlDB = None):
+    if dburi == LOCAL_DB:
+        dbfile = "D:/Langchain/Database Manager AI/student.db"
+        creator = lambda: sqlite3.connect(f"file:{dbfile}?mode=ro",uri=True)
+        return SQLDatabase(create_engine("sqlite:///",creator=creator))
+    else:
+        return SQLDatabase(create_engine(f"mysql+mysqlconnector://{mysqluser}:{mysqlPassword}@{mysqlHost}/{mysqlDB}"))
+
+if db_uri==MYSQL:
+    db = configureDB(db_uri,mysqlHost,mysqluser,mysqlPassword,mysqlDB)
+else:
+    db = configureDB(db_uri)
 
